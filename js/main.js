@@ -1,4 +1,30 @@
 (function () {
+  var heroTitle = document.getElementById('hero-title');
+  if (heroTitle) {
+    var nodes = Array.prototype.slice.call(heroTitle.childNodes);
+    heroTitle.textContent = '';
+    var wordIndex = 0;
+    function appendWord(content, isNode) {
+      var span = document.createElement('span');
+      span.className = 'word';
+      span.style.animationDelay = (0.15 + wordIndex * 0.09) + 's';
+      if (isNode) span.appendChild(content); else span.textContent = content;
+      heroTitle.appendChild(span);
+      heroTitle.appendChild(document.createTextNode(' '));
+      wordIndex++;
+    }
+    nodes.forEach(function (node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        node.textContent.split(/\s+/).forEach(function (word) {
+          if (word === '') return;
+          appendWord(word, false);
+        });
+      } else {
+        appendWord(node, true);
+      }
+    });
+  }
+
   var header = document.getElementById('site-header');
   var toggle = document.getElementById('nav-toggle');
   var nav = document.getElementById('main-nav');
