@@ -21,8 +21,8 @@
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
   --container: 1200px;
-  --radius: 4px;
-  --radius-sm: 2px;
+  --radius: 22px;
+  --radius-sm: 12px;
 
   --shadow-sm: 0 0.6px 1.6px -1.5px rgba(0,0,0,.5), 0 2.3px 6px -3px rgba(0,0,0,.45), 0 5.6px 14.5px -4.5px rgba(0,0,0,.4);
   --shadow-md: 0 1px 2px -1px rgba(0,0,0,.5), 0 4px 10px -3px rgba(0,0,0,.45), 0 14px 32px -8px rgba(0,0,0,.5);
@@ -75,9 +75,9 @@ button, input{ font-family:inherit; }
    Buttons
    ========================================================================== */
 .btn{
-  display:inline-flex; align-items:center; justify-content:center; gap:10px;
-  padding:16px 32px;
-  border-radius:var(--radius-sm);
+  display:inline-flex; align-items:center; justify-content:center; gap:14px;
+  padding:8px 8px 8px 26px;
+  border-radius:100px;
   font-family:var(--font-mono);
   font-size:0.78rem; font-weight:600;
   text-transform:uppercase; letter-spacing:0.14em;
@@ -86,19 +86,28 @@ button, input{ font-family:inherit; }
   transition:transform .35s var(--ease), background .3s ease, color .3s ease, border-color .3s ease, box-shadow .35s var(--ease);
   white-space:nowrap;
 }
+.btn:not(:has(.icon-arrow)){ padding:16px 32px; }
 .btn:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); }
 .btn-primary{ background:var(--accent); color:var(--dark); }
 .btn-primary:hover{ background:var(--accent-soft); box-shadow:var(--glow); }
 .btn-inverse{ background:var(--ink); color:var(--dark); }
 .btn-inverse:hover{ background:var(--accent-soft); box-shadow:var(--glow); }
-.btn-outline{ background:transparent; color:var(--ink); border-color:rgba(247,242,236,.35); }
+.btn-outline{ background:transparent; color:var(--ink); border-color:rgba(247,242,236,.35); padding:16px 32px; }
 .btn-outline:hover{ background:var(--ink); color:var(--dark); border-color:var(--ink); }
 .btn-light{ color:#fff; border-color:rgba(255,255,255,.5); }
 .btn-light:hover{ border-color:#fff; background:rgba(255,255,255,.1); }
-.btn-sm{ padding:11px 22px; font-size:0.72rem; }
+.btn-sm{ padding:8px 8px 8px 22px; font-size:0.72rem; }
+.btn-sm:not(:has(.icon-arrow)){ padding:11px 22px; }
 .btn-block{ width:100%; }
-.btn .icon-arrow{ transition:transform .35s var(--ease); }
-.btn:hover .icon-arrow{ transform:translateX(4px); }
+.btn .icon-arrow{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:30px; height:30px; border-radius:50%; flex-shrink:0;
+  background:var(--dark); color:var(--accent-soft);
+  font-size:0.85rem; line-height:1;
+  transition:transform .4s var(--ease);
+}
+.btn-outline .icon-arrow{ background:var(--ink); color:var(--dark); }
+.btn:hover .icon-arrow{ transform:rotate(45deg); }
 
 /* ==========================================================================
    Header
@@ -205,9 +214,10 @@ button, input{ font-family:inherit; }
 }
 .hero-text{
   font-size:clamp(1rem, 1.6vw, 1.2rem);
-  color:rgba(255,255,255,.85);
+  color:rgba(255,255,255,.62);
   max-width:600px; margin-inline:auto; margin-bottom:36px;
 }
+.hero-text strong{ color:#fff; font-weight:700; }
 .hero-ctas{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:28px; }
 
 .reassurance{
@@ -304,6 +314,7 @@ button, input{ font-family:inherit; }
 .eyebrow-light{ color:var(--accent-soft); }
 .section-head h2{ font-size:clamp(2rem, 4vw, 2.9rem); margin-bottom:18px; }
 .section-text{ font-size:1.05rem; color:var(--ink-soft); max-width:560px; }
+.section-text strong{ color:var(--ink); font-weight:700; }
 .section-text.light{ color:rgba(255,255,255,.82); }
 
 /* reveal-on-scroll */
@@ -445,16 +456,23 @@ button, input{ font-family:inherit; }
   transition:transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s ease;
 }
 .testimonial-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md), var(--glow); border-color:rgba(226,164,140,.3); }
-.testimonial-card::before{
-  content:'“'; position:absolute; top:8px; left:24px;
-  font-family:var(--font-display); font-size:3.2rem; font-weight:700; font-style:italic;
-  color:var(--accent); opacity:.5; line-height:1;
-}
+.rating{ display:flex; gap:4px; margin-bottom:18px; }
+.rating svg{ width:15px; height:15px; color:var(--accent); }
 .testimonial-card p{
   font-family:var(--font-display); font-style:italic; font-size:1.15rem;
-  color:var(--ink); margin-bottom:20px; line-height:1.5; position:relative; z-index:1;
+  color:var(--ink); margin-bottom:22px; line-height:1.5; position:relative; z-index:1;
 }
-.testimonial-card footer{ font-size:0.85rem; color:var(--ink-soft); font-weight:600; }
+.testimonial-card footer{
+  display:flex; align-items:center; gap:12px;
+  font-size:0.85rem; color:var(--ink-soft); font-weight:600;
+}
+.avatar{
+  width:34px; height:34px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--bg-alt); color:var(--accent);
+  border:1px solid var(--line);
+}
+.avatar svg{ width:16px; height:16px; }
 
 /* ==========================================================================
    Nos engagements
